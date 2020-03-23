@@ -6,7 +6,7 @@ import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => {
+const Home = () => {
   
   const [HW, setHW] = useState(0)
   useEffect(() => {
@@ -15,13 +15,12 @@ const IndexPage = () => {
       .then(response => response.json()) // parse JSON from request
       .then(resultData => {
         setHW(resultData)
-      }) // set data for the number of stars
+      }) // set data into HW
   }, [])
 
   return (
   <Layout>
     <SEO title="Home" />
-    <Link to="/profile/">Go to profile</Link>
     <h1>it's a reddit clone</h1>
     <p>there's some content here</p>
     <p>probably limit to 20 articles on home page</p>
@@ -35,4 +34,4 @@ const IndexPage = () => {
 
 }
 
-export default IndexPage
+export default Home

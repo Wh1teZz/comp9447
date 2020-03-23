@@ -4,13 +4,16 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const Profile = () => (
+const Content = () => (
+
+
+    
   <Layout>
-    <SEO title="Profile" />
-    <h1>this page is for your profile</h1>
-    <p>something goes here i guess</p>
+    <SEO title="Page content" />
+    <h1>Fetch from db</h1>
+    <p>Fetch from db</p>
     <Link to="/">Go back to the home</Link>
   </Layout>
 )
 
-export default Profile
+export default Content
