@@ -1,0 +1,6 @@
+Frontend 9447 notes
+
+Using axios etc instead of fetch because 
+
+WebpackError: ReferenceError: fetch is not defined
+
