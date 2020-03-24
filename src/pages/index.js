@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-
+import axios from 'axios';
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
@@ -17,7 +17,7 @@ const Home = () => {
   // }, [])
 
 
-  const HW = fetch(`https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/`)
+  const HW = axios.get(`https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/`)
       .then(response => response.json()) // parse JSON from request
       .catch(function(response) {
         console.log("fetch error:**********");
