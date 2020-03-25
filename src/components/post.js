@@ -6,7 +6,7 @@ function Posts({ channel_id = '' }) {
         return
     }
 
-    const token = window.sessionStorage.getItem('userToken');
+    const token = sessionStorage.getItem('userToken');
 
     function getPosts({token='', channel_id=''}){
         const data = axios.get("API", {
@@ -21,9 +21,17 @@ function Posts({ channel_id = '' }) {
 
     const posts = getPosts(token, channel_id);
 
+    var keys = Object.keys(posts.post.postID)
+    var allPosts = keys.map((t) => 
+                       posts.post.postID[t].map((e) => (
+                            <div>
+                              {e.author, e.score, e.title, e.type, e.text, e.time}
+                            </div>
+                          ))
+                       );
     return (
         <li>
-            {posts.slice().reverse()}
+            {allPosts}
         </li>
     );
 

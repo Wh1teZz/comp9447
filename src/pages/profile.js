@@ -8,7 +8,7 @@ import SEO from "../components/seo"
 
 function Profile () {
 
-  const token = window.sessionStorage.getItem('userToken');
+  const token = sessionStorage.getItem('userToken');
 
   if (!token){
     return (

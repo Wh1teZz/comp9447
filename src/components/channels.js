@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function Channels() {
 
-    const token = window.sessionStorage.getItem('userToken');
+    const token = sessionStorage.getItem('userToken');
 
     function getChannels({token=''}){
         const data = axios.get("API", {

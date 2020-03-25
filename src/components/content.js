@@ -6,7 +6,7 @@ function PostComments({ post_id = '' }) {
         return
     }
 
-    const token = window.sessionStorage.getItem('userToken');
+    const token = sessionStorage.getItem('userToken');
 
     function getPostComments({token='', post_id=''}){
         const data = axios.get("API", {
