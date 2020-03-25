@@ -6,7 +6,11 @@ function PostComments({ post_id = '' }) {
         return
     }
 
-    const token = sessionStorage.getItem('userToken');
+    const [token, setToken] = useState(undefined)
+
+    useEffect(() => {
+        setToken(localStorage.getItem('token'))
+    }, [])
 
     function getPostComments({token='', post_id=''}){
         const data = axios.get("API", {

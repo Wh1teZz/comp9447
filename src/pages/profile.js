@@ -8,7 +8,11 @@ import SEO from "../components/seo"
 
 function Profile () {
 
-  const token = sessionStorage.getItem('userToken');
+  const [token, setToken] = useState(undefined)
+
+  useEffect(() => {
+      setToken(localStorage.getItem('token'))
+  }, [])
 
   if (!token){
     return (
