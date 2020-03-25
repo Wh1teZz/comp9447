@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react"
 import axios from 'axios';
 
 function PostComments({ post_id = '' }) {
-    if (!post_id){
-        return
-    }
 
     const [token, setToken] = useState(undefined)
 

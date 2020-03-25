@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react"
 import axios from 'axios';
 
 function Posts({ channel_id = '' }) {
-    if (!channel_id){
-        return
-    }
 
     const [token, setToken] = useState(undefined)
 
