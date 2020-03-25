@@ -3,28 +3,31 @@ import axios from 'axios';
 
 function Channels() {
 
-    const [token, setToken] = useState(undefined)
+    const token = window.sessionStorage.getItem('userToken');
 
+    const [channels, setChannels] = useState(0)
     useEffect(() => {
-        setToken(localStorage.getItem('token'))
-    }, [])
-
-    function getChannels({token=''}){
-        const data = axios.get("API", {
+        axios.get("API", {
             params: {
                 token
             }
         })
+        .then(function (response) {
+            setChannels(response.data)
+        })
         .catch((err) => {})
-        return data;
-    }
-
-    const channels = getChannels(token);
+    })
 
     return (
-        <li>
-            {channels.slice().reverse()}
-        </li>
+        <form>
+
+            <button onClick={makePost}> 
+                Make Post
+            </button>
+            <li>
+                {channels}
+            </li>
+        </form>
     );
 
 }

@@ -1,33 +1,31 @@
 import React, { useState, useEffect } from "react"
 import axios from 'axios';
 
-function PostComments({ post_id = '' }) {
+function Comments({ post_id = '' }) {
 
-    const [token, setToken] = useState(undefined)
+    const token = window.sessionStorage.getItem('userToken');
 
+    const [comments, setComments] = useState(0)
     useEffect(() => {
-        setToken(localStorage.getItem('token'))
-    }, [])
-
-    function getPostComments({token='', post_id=''}){
         const data = axios.get("API", {
             params: {
                 token,
                 post_id
             }
         })
+        .then(function (response) {
+            setComments(response.data)
+        })
         .catch((err) => {})
         return data;
-    }
-
-    const post_comments = getPostComments(token, post_id);
+    })
 
     return (
         <li>
-            {post_comments.slice().reverse()}
+            {comments}
         </li>
     );
 
 }
 
-export default PostComments;
+export default Comments;

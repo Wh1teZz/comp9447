@@ -3,24 +3,21 @@ import axios from 'axios';
 
 function Posts({ channel_id = '' }) {
 
-    const [token, setToken] = useState(undefined)
+    const token = window.sessionStorage.getItem('userToken');
 
+    const [posts, setPosts] = useState(0)
     useEffect(() => {
-        setToken(localStorage.getItem('token'))
-    }, [])
-
-    function getPosts({token='', channel_id=''}){
-        const data = axios.get("API", {
+        axios.get("API", {
             params: {
                 token,
                 channel_id
             }
         })
+        .then(function (response) {
+            setPosts(response.data)
+        })
         .catch((err) => {})
-        return data;
-    }
-
-    const posts = getPosts(token, channel_id);
+    })
 
     var keys = Object.keys(posts.post.postID)
     var allPosts = keys.map((t) => 
