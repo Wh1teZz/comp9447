@@ -25,8 +25,7 @@ function RegisterPage({ setAuth, ...props }) {
     axios.post(`https://9il287rnf8.execute-api.us-east-1.amazonaws.com/alpha/register`, { ...values })
       .then((response) => {
         console.log(response);
-        const data = response.data;
-        setAuth(data.token); //maybe u_id is needed , data.u_id
+        setAuth(response.data.token); //maybe u_id is needed , data.u_id
         props.history.push('/');
       })
       .catch((err) => {});
@@ -42,12 +41,8 @@ function RegisterPage({ setAuth, ...props }) {
             variant="outlined"
             margin="normal"
             required
-            id="username"
-            label="Username"
-            name="username"
             type="text"
-            autoFocus
-            value={values.name_first}
+            value={values.username}
             onChange={handleChange('username')}
           />
           <br />
@@ -55,10 +50,6 @@ function RegisterPage({ setAuth, ...props }) {
             variant="outlined"
             margin="normal"
             required
-            id="email"
-            label="Email"
-            name="email"
-            type="email"
             value={values.email}
             onChange={handleChange('email')}
           />
@@ -67,11 +58,7 @@ function RegisterPage({ setAuth, ...props }) {
             variant="outlined"
             margin="normal"
             required
-            name="password"
-            label="Password"
             type="password"
-            id="password"
-            autoComplete="current-password"
             value={values.password}
             onChange={handleChange('password')}
           />

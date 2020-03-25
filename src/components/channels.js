@@ -21,9 +21,9 @@ function Channels() {
     return (
         <form>
 
-            <button onClick={makePost}> 
+            {/* <button onClick={makePost}> 
                 Make Post
-            </button>
+            </button> */}
             <li>
                 {channels}
             </li>
