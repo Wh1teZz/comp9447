@@ -3,11 +3,11 @@ import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import PostComments from '../components/content';
+import Channels from '../components/channels';
 
 const Content = () => (
   //1 for debugging
-    <Layout body={<PostComments post_id='1' />}>
+    <Layout body={<Channels />}>
       <SEO title="Page content" />
       <h1>Fetch from db</h1>
       <p>Fetch from db</p>
