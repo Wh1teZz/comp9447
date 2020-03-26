@@ -23,7 +23,7 @@ function MakePost (channel_id = '') {
     // Quick Validation
     if (!message || !title) return;
 
-      axios.post(`API`, {
+      axios.post(`https://9il287rnf8.execute-api.us-east-1.amazonaws.com/alpha/posts/create/`, {
         token,
         channel_id,
         message,
@@ -35,12 +35,14 @@ function MakePost (channel_id = '') {
         .catch((err) => { });
     };
 
+
+    //    action='/'
   return (
   <body>
     <h1>
         Make a post
     </h1>
-    <form noValidate onSubmit={submitPost}>
+    <form noValidate onSubmit={submitPost} > 
       <input type="text"
         variant="outlined"
         margin="normal"
@@ -58,7 +60,7 @@ function MakePost (channel_id = '') {
         onChange={handleChange('currentText')}
       />
       <br />
-      <button type="submit" fullWidth variant="contained" color="primary">
+      <button type="submit" variant="contained" color="primary">
         make post
       </button>
       <br />

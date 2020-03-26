@@ -42,11 +42,7 @@ function LoginPage({ setAuth, ...props }) {
             variant="outlined"
             margin="normal"
             required
-            id="username"
-            label="Username"
-            name="username"
             type="text"
-            autoFocus
             onChange={handleChange('username')}
           />
             <br />
@@ -54,11 +50,7 @@ function LoginPage({ setAuth, ...props }) {
             variant="outlined"
             margin="normal"
             required
-            name="password"
-            label="Password"
             type="password"
-            id="password"
-            autoComplete="current-password"
             onChange={handleChange('password')}
           />
             <br />
