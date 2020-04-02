@@ -7,10 +7,11 @@ import Comments from '../components/content';
 
 const Content = () => (
   //1 for debugging
-    <Layout body={<Comments post_id='1' />}>
+    <Layout>
       <SEO title="Page content" />
       <h1>Fetch from db</h1>
       <p>Fetch from db</p>
+      <Comments />
       <Link to="/">Go back to the home</Link>
     </Layout>
 )

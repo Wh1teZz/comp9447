@@ -7,9 +7,9 @@ function Comments({ post_id = '' }) {
 
     const [comments, setComments] = useState(0)
     useEffect(() => {
-        const data = axios.get("API", {
+        const data = axios.get("https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/posts/get/", {
             params: {
-                token,
+                token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uIjoicEMzd0hqc1pJRCIsImlhdCI6MTU4NTE5MDYyMi45NTgzNjEsImV4cCI6MTU4NTc5NTQyMi45NTgzNjcsInVzZXJJRCI6IjgwNWM0MTgzZjhkNjEyZDQ4MTBlYzc2OThkZTE5NDRjYjQ1NTdlODgwMDlmNTk2M2VlNjg3OTYxMGI0MGJkOGIifQ.sesVAhfxF8V4dgRBWzk9OQVvBK3S6thD4NAkXMV6rb0",
                 post_id
             }
         })

@@ -1,76 +1,66 @@
-import axios from 'axios';
-import { Link } from "gatsby"
+import React,{useState} from 'react';
 import Layout from "../components/layout"
-import React from 'react';
+import axios from 'axios';
 
-function RegisterPage({ setAuth, ...props }) {
+const RegistraionForm = () => {
 
-  const [values, setValues] = React.useState({
-    username: '',
-    email: '',
-    password: '',
-  });
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [error, setError] = useState('');
 
-  const handleChange = name => event => {
-    setValues({ ...values, [name]: event.target.value });
-  };
+    const registerUser = async () => {
+        if (password === confirmPassword){
+            const result = await axios.post(`https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/register/`, {
+                username,
+                password,
+                email
+                //header is not required since the request is in plain text
+            });
+            const body = await result;
+            if (body.status === 200){
+                window.location.href='/';
+            }
+            else{
+                setError(body.error)
+            }
+        }
+        else{
+            setError("Please make sure your passwords match");
+        }
+    }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    // Quick validation
-    if (!values.username || !values.email || !values.password) return;
-
-    // Send to backend
-    axios.post(`https://9il287rnf8.execute-api.us-east-1.amazonaws.com/alpha/register`, { ...values })
-      .then((response) => {
-        console.log(response);
-        setAuth(response.data.token); //maybe u_id is needed , data.u_id
-        props.history.push('/');
-      })
-      .catch((err) => {});
-  }
-
-  return (
-    <Layout>
-        <h1>
-          Register
-        </h1>
-        <form noValidate onSubmit={handleSubmit}>
-          <input type = "text"
-            variant="outlined"
-            margin="normal"
-            required
-            type="text"
-            value={values.username}
-            onChange={handleChange('username')}
-          />
-          <br />
-          <input type = "text"
-            variant="outlined"
-            margin="normal"
-            required
-            value={values.email}
-            onChange={handleChange('email')}
-          />
-          <br />
-          <input type = "text"
-            variant="outlined"
-            margin="normal"
-            required
-            type="password"
-            value={values.password}
-            onChange={handleChange('password')}
-          />
-          <br />
-          <button type="submit" fullWidth variant="contained" color="primary">
-            Sign Up
-          </button>
-          <br />
-          <Link to="/">Home</Link>
-        </form>
-    </Layout>
-  )
+    return (
+      <Layout>
+        <div id = "add-comment-form">
+            <h3>Register Here!</h3>
+            <small>{error}</small>
+            <label>
+                Email Id:
+                <input type = "text" value = {email} onChange= {(event) => setEmail(event.target.value)} />
+            </label>
+            <br />
+            <label>
+                Username:
+                <input type = "text" value = {username} onChange= {(event) => setUsername(event.target.value)} />
+            </label>
+            <br />
+            <label>
+                Password:
+                <input type = "password" value = {password} onChange= {(event) => setPassword(event.target.value)} />
+            </label>
+            <br />
+            <label>
+                Confirm Password:
+                <input type = "password" value = {confirmPassword} onChange= {(event) => setConfirmPassword(event.target.value)} />
+            </label>
+            <br />
+            <button onClick={registerUser}>Register</button> <br/><br/>
+            <button onClick={event =>  window.location.href='/login'} >Login Instead</button>
+        </div>
+        </Layout>
+    );
 }
 
-export default RegisterPage;
+export default RegistraionForm;

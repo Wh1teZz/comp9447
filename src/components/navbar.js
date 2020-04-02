@@ -10,8 +10,6 @@ export default () => (
       borderBottom: "1px solid #d1c1e0",
     }}
   >
-    <span>You are not logged in</span>
-
     <nav>
       <Link to="/">Home</Link>
       {` `}

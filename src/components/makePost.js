@@ -23,7 +23,7 @@ function MakePost (channel_id = '') {
     // Quick Validation
     if (!message || !title) return;
 
-      axios.post(`https://9il287rnf8.execute-api.us-east-1.amazonaws.com/alpha/posts/create/`, {
+      axios.post(`https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/posts/create/`, {
         token,
         channel_id,
         message,

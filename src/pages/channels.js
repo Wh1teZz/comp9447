@@ -7,10 +7,11 @@ import Channels from '../components/channels';
 
 const Content = () => (
   //1 for debugging
-    <Layout body={<Channels />}>
+    <Layout>
       <SEO title="Page content" />
       <h1>Fetch from db</h1>
       <p>Fetch from db</p>
+      <Channels />
       <Link to="/">Go back to the home</Link>
     </Layout>
 )
