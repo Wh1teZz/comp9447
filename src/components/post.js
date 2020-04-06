@@ -1,38 +1,58 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import axios from 'axios';
+import { Link } from "gatsby";
 
-function Posts({ channel_id = '' }) {
 
-    const token = window.sessionStorage.getItem('userToken');
+class Posts extends React.Component {
 
-    const [posts, setPosts] = useState(0)
-    useEffect(() => {
-        axios.get("API", {
-            params: {
-                token,
-                channel_id
+    //token = window.sessionStorage.getItem('userToken');
+
+    state = {
+        posts: []
+        };
+
+     componentDidMount() {
+        this.getPosts();
+     }
+
+     // 
+     reMap = (key, value) =>
+     {
+         var out = {key:key, value:value};
+         return out;
+     }
+
+    getPosts = async () => {
+        let channelID = "1";
+        let res = await axios.get("https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/posts/getlist/",
+        {
+            params: 
+            {
+                channelID: channelID
             }
-        })
-        .then(function (response) {
-            setPosts(response.data)
-        })
-        .catch((err) => {})
-    })
+        });
+        
+        if (res.data.status === 200){
+        let data = Object.keys(res.data.posts).map((key) => this.reMap(key, res.data.posts[key]));
+        this.setState({ posts: data });
+        }
+    };
 
-    var keys = Object.keys(posts.post.postID)
-    var allPosts = keys.map((t) => 
-                       posts.post.postID[t].map((e) => (
-                            <div>
-                              {e.author, e.score, e.title, e.type, e.text, e.time}
-                            </div>
-                          ))
-                       );
-    return (
-        <li>
-            {allPosts}
-        </li>
-    );
-
+    render (){
+        return (
+        <ul> 
+            {this.state.posts.length === 0 ?
+            (<div>Loading...</div>):
+            (this.state.posts.map((c_id) => {
+                return <div>
+                    <Link to = {"/content/"} state={{postID:c_id.key}}>
+                        {c_id.value["title"]}
+                    </Link>
+                    </div>;}))
+            }
+        </ul>
+        );
+    }
 }
 
 export default Posts;
