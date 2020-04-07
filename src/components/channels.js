@@ -1,5 +1,6 @@
-import React from "react"
-import axios from 'axios'
+import React from "react";
+import axios from 'axios';
+import { Link } from "gatsby";
 
 class Channels extends React.Component {
 
@@ -10,14 +11,20 @@ class Channels extends React.Component {
         };
 
 
-     componentDidMount() {
-        this.getChannels();
-     }
+    componentDidMount() {
+    this.getChannels();
+    }
+
+    reMap = (key, value) =>
+    {
+        var out = {key:key, value:value};
+        return out;
+    }
 
     getChannels = async () => {
         // let token = window.sessionStorage.getItem('userToken');
         let res = await axios.get("https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/channel/get/");
-        let data = Object.keys(res.data.channels).map((key) => res.data.channels[key]);
+        let data = Object.keys(res.data.channels).map((key) => this.reMap(key, res.data.channels[key]));
         this.setState({ channels: data });
     };
 
@@ -26,7 +33,13 @@ class Channels extends React.Component {
         <ul> 
             {this.state.channels.length === 0 ?
             (<div>Loading...</div>):
-            (this.state.channels.map((c_id) => {return <div>{c_id["channelName"]}</div>;}))
+            (this.state.channels.map((c_id) => 
+                {return <div>
+                    <Link to = {"/posts/"} state={{channelID:c_id.key}}>
+                        {c_id.value["channelName"]}
+                    </Link>
+                </div>
+                }))
             }
         </ul>
         );

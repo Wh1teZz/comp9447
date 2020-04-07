@@ -13,6 +13,8 @@ export default () => (
     <nav>
       <Link to="/">Home</Link>
       {` `}
+      <Link to="/channels/">Channels</Link>
+      {` `}
       <Link to="/login/">Login</Link>
       {` `}
       <Link to="/register/">Register</Link>

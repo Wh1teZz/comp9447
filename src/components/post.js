@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from "gatsby";
 
 
-class Posts extends React.Component {
+class Post extends React.Component {
 
     //token = window.sessionStorage.getItem('userToken');
 
@@ -22,8 +22,7 @@ class Posts extends React.Component {
          return out;
      }
 
-    getPosts = async () => {
-        let channelID = "1";
+    getPosts = async (channelID=this.props.channelID) => {
         let res = await axios.get("https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/posts/getlist/",
         {
             params: 
@@ -43,16 +42,16 @@ class Posts extends React.Component {
         <ul> 
             {this.state.posts.length === 0 ?
             (<div>Loading...</div>):
-            (this.state.posts.map((c_id) => {
+            (this.state.posts.map((p_id) => {
                 return <div>
-                    <Link to = {"/content/"} state={{postID:c_id.key}}>
-                        {c_id.value["title"]}
+                    <Link to = {"/content/"} state={{postID:p_id.key}}>
+                        {p_id.value["title"]}
                     </Link>
-                    </div>;}))
+                </div>;}))
             }
         </ul>
         );
     }
 }
 
-export default Posts;
+export default Post;

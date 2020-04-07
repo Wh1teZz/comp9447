@@ -3,17 +3,17 @@ import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Posts from '../components/post';
+import Post from '../components/post';
 
-const Content = () => (
+const Posts = ({location}) => (
   //1 for debugging
-    <Layout body={<Posts post_id='1' />}>
+    <Layout>
       <SEO title="Page content" />
       <h1>Fetch from db</h1>
       <p>Fetch from db</p>
-      <Posts />
+      <Post channelID={location.state.channelID}/>
       <Link to="/">Go back to the home</Link>
     </Layout>
 )
 
-export default Content
+export default Posts
