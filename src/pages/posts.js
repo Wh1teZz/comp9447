@@ -8,7 +8,7 @@ import Post from '../components/post';
 const Posts = ({location}) => (
   //1 for debugging
     <Layout>
-      <SEO title="Page content" />
+      <SEO title="Posts" />
       <h1>Fetch from db</h1>
       <p>Fetch from db</p>
       <Post channelID={location.state.channelID}/>

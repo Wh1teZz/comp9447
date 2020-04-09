@@ -39,7 +39,7 @@ class Comments extends React.Component {
     render (){
         return (
         <ul> 
-            {this.state.comments.length === 0 ?
+            {this.state.postInfo.length === 0 ?
 
                 (<div>Loading...</div>)
                 
@@ -57,7 +57,7 @@ class Comments extends React.Component {
                     {
                         return <ul>
                             <div>
-                                {c_id["userID"]}
+                                <b>{c_id["username"]}</b>
                             </div>
                             <small>
                                 {c_id["time_posted"]}

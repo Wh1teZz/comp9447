@@ -7,20 +7,25 @@ class Post extends React.Component {
 
     //token = window.sessionStorage.getItem('userToken');
 
-    state = {
-        posts: []
+    constructor(props) {
+        super(props)
+        this.state = {
+            posts: []
         };
+        this.reMap = this.reMap.bind(this);
+        this.getPosts = this.getPosts.bind(this);
+    }
 
-     componentDidMount() {
-        this.getPosts();
-     }
+    componentDidMount() {
+    this.getPosts();
+    }
 
      // 
-     reMap = (key, value) =>
-     {
-         var out = {key:key, value:value};
-         return out;
-     }
+    reMap = (key, value) =>
+    {
+        var out = {key:key, value:value};
+        return out;
+    }
 
     getPosts = async (channelID=this.props.channelID) => {
         let res = await axios.get("https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/posts/getlist/",
@@ -42,12 +47,23 @@ class Post extends React.Component {
         <ul> 
             {this.state.posts.length === 0 ?
             (<div>Loading...</div>):
-            (this.state.posts.map((p_id) => {
+            [
+                <div>
+                <Link to = {"/createPost/"} state={{channelID:this.props.channelID}}>
+                    <button type="button">
+                        make post
+                    </button>
+                </Link>
+                <br/> <br/> <br/>
+                </div>,
+
+                (this.state.posts.map((p_id) => {
                 return <div>
                     <Link to = {"/content/"} state={{postID:p_id.key}}>
                         {p_id.value["title"]}
                     </Link>
                 </div>;}))
+            ]
             }
         </ul>
         );
