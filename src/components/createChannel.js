@@ -32,7 +32,7 @@ class CreateChannel extends React.Component {
         )
 
         if (res.data.statusCode === 200) {
-            console.log("success", res.data.postID);
+            console.log("success", res.data.channelID);
         }
     };
 
