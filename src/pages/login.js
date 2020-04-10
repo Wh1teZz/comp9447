@@ -19,12 +19,14 @@ const LoginForm = () => {
             password
             }));
             const body = await result;
-            if (body.status === 200){
+            if (body.data.status === 200){
               window.sessionStorage.setItem('username', username);
               window.sessionStorage.setItem('userToken', body.token);
               window.location.href='/welcome';
             }
-
+            else{
+                setError(body.data.error)
+            }
         }
         else{
             setError('Either username or password not filled');

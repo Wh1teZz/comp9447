@@ -11,7 +11,7 @@ const Content = ({location}) => (
       <SEO title="Page content" />
       <h1>Fetch from db</h1>
       <p>Fetch from db</p>
-      <Comments postID={location.state.postID}/>
+      <Comments postID={(location.state || {}).postID}/>
       <Link to="/">Go back to the home</Link>
     </Layout>
 )

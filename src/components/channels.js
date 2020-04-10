@@ -31,6 +31,14 @@ class Channels extends React.Component {
     render (){
         return (
         <ul> 
+            <div>
+                <Link to = {"/createChannel/"}>
+                    <button type="button">
+                        create a new channel
+                    </button>
+                </Link>
+            </div>
+            <br /> <br /> <br />
             {this.state.channels.length === 0 ?
             (<div>Loading...</div>):
             (this.state.channels.map((c_id) => 

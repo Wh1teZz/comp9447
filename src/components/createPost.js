@@ -25,7 +25,8 @@ class CreatePost extends React.Component {
 
   //token = window.sessionStorage.getItem('userToken');
   
-  submitPost = (channelID=1, 
+  submitPost = async (event, 
+    channelID=this.props.channelID, 
     text=this.state.currentText.trim(),
     title=this.state.currentTitle.trim(),
     ) => {
@@ -34,18 +35,20 @@ class CreatePost extends React.Component {
     // Quick Validation
     if (!text || !title) return;
 
-    axios.post(`https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/posts/create/`, 
+    const res = await axios.post(`https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/posts/create/`, 
+        JSON.stringify(
           {
-            token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uIjoiMHFQeXdTcmN2ayIsImlhdCI6MTU4NjIyNDkzNi45NzY0OCwiZXhwIjoxNTg2ODI5NzM2Ljk3NjQ4NiwidXNlcklEIjoiODA1YzQxODNmOGQ2MTJkNDgxMGVjNzY5OGRlMTk0NGNiNDU1N2U4ODAwOWY1OTYzZWU2ODc5NjEwYjQwYmQ4YiJ9.2ZMi4Btn8p1OZQjTciJlFVLr_ZFAQ2oNrH88yKQrw78",
-            channelID: "1",
-            text:"text",
-            title:"title"
+            token,
+            channelID,
+            text,
+            title
           }
+        )
       )
-        .then(({ data }) => {
-          console.log(data);
-        })
-        .catch((err) => { });
+      
+      if (res.data.statusCode === 200){
+        console.log("success", res.data.postID);
+      }
   };
 
 

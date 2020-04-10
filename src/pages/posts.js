@@ -11,7 +11,7 @@ const Posts = ({location}) => (
       <SEO title="Posts" />
       <h1>Fetch from db</h1>
       <p>Fetch from db</p>
-      <Post channelID={location.state.channelID}/>
+      <Post channelID={(location.state || {}).channelID}/>
       <Link to="/">Go back to the home</Link>
     </Layout>
 )

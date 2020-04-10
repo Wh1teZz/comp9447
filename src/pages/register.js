@@ -2,15 +2,38 @@ import React,{useState} from 'react';
 import Layout from "../components/layout"
 import axios from 'axios';
 
-const RegistraionForm = () => {
+class RegistraionForm extends React.Component {
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [error, setError] = useState('');
+    state = {
+        username:"",
+        password:"",
+        confirmPassword:"",
+        email:"",
+        error:""
+    }
 
-    const registerUser = async () => {
+    onUsernameChange = (event) => {
+        this.setState({username: event.target.value });
+    };
+
+    onPasswordChange = (event) => {
+        this.setState({password: event.target.value });
+    };
+
+    onPasswordConfChange = (event) => {
+        this.setState({confirmPassword: event.target.value });
+    };
+
+    onEmailChange = (event) => {
+        this.setState({email: event.target.value });
+    };
+
+    registerUser = async (
+        username=this.state.username,
+        password=this.state.password,
+        confirmPassword=this.state.confirmPassword,
+        email=this.state.email,
+    ) => {
         if (password === confirmPassword){
             const result = await axios.post(`https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/register/`, {
                 username,
@@ -23,44 +46,47 @@ const RegistraionForm = () => {
                 window.location.href='/';
             }
             else{
-                setError(body.error)
+                this.setState({error:body.error})
             }
         }
         else{
-            setError("Please make sure your passwords match");
+            this.setState({error:"Please make sure your passwords match"});
         }
     }
+
+    render(){
 
     return (
       <Layout>
         <div id = "add-comment-form">
             <h3>Register Here!</h3>
-            <small>{error}</small>
+            <small>{this.state.error}</small>
             <label>
                 Email Id:
-                <input type = "text" value = {email} onChange= {(event) => setEmail(event.target.value)} />
+                <input type = "text" value = {this.state.email} onChange= {this.onEmailChange} />
             </label>
             <br />
             <label>
                 Username:
-                <input type = "text" value = {username} onChange= {(event) => setUsername(event.target.value)} />
+                <input type = "text" value = {this.state.username} onChange= {this.onUsernameChange} />
             </label>
             <br />
             <label>
                 Password:
-                <input type = "password" value = {password} onChange= {(event) => setPassword(event.target.value)} />
+                <input type = "password" value = {this.state.password} onChange= {this.onPasswordChange} />
             </label>
             <br />
             <label>
                 Confirm Password:
-                <input type = "password" value = {confirmPassword} onChange= {(event) => setConfirmPassword(event.target.value)} />
+                <input type = "password" value = {this.state.confirmPassword} onChange= {this.onPasswordConfChange} />
             </label>
             <br />
-            <button onClick={registerUser}>Register</button> <br/><br/>
+            <button onClick={this.registerUser}>Register</button> <br/><br/>
             <button onClick={event =>  window.location.href='/login'} >Login Instead</button>
         </div>
-        </Layout>
+      </Layout>
     );
+    }
 }
 
 export default RegistraionForm;

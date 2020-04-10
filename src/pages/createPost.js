@@ -5,7 +5,7 @@ import CreatePost from "../components/createPost"
 const createPostPage = ({location}) => {
   return(
     <Layout>
-      <CreatePost channelID={location.state.channelID}/>
+      <CreatePost channelID={(location.state || {}).channelID}/>
     </Layout>
   )
 }
