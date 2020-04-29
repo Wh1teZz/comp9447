@@ -4,14 +4,17 @@ import {Link} from "gatsby";
 
 class Comments extends React.Component {
 
-    //token = window.sessionStorage.getItem('userToken');
     state = {
         postInfo: [],
         comments: [],
-        currComment: ""
+        currComment: "",
+        username:"",
+        userToken:""
     };
 
     componentDidMount() {
+        this.setState({username:window.sessionStorage.getItem('username')});
+        this.setState({userToken:window.sessionStorage.getItem('userToken')});
         this.getComments();
     }
 
@@ -39,7 +42,7 @@ class Comments extends React.Component {
 
         if (!comment) return;
 
-        const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uIjoiMHFQeXdTcmN2ayIsImlhdCI6MTU4NjIyNDkzNi45NzY0OCwiZXhwIjoxNTg2ODI5NzM2Ljk3NjQ4NiwidXNlcklEIjoiODA1YzQxODNmOGQ2MTJkNDgxMGVjNzY5OGRlMTk0NGNiNDU1N2U4ODAwOWY1OTYzZWU2ODc5NjEwYjQwYmQ4YiJ9.2ZMi4Btn8p1OZQjTciJlFVLr_ZFAQ2oNrH88yKQrw78";
+        const token = window.sessionStorage.getItem('userToken');
         let res = await axios.post("https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/comments/create/",
             JSON.stringify(
                 {
@@ -50,7 +53,8 @@ class Comments extends React.Component {
             )
         )
         if (res.data.statusCode === 200) {
-            console.log("success", res.data.commentID)
+            console.log("success", res.data.commentID);
+            window.location.href='/channels';
         }
     }
 

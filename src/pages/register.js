@@ -35,15 +35,16 @@ class RegistraionForm extends React.Component {
         email=this.state.email,
     ) => {
         if (password === confirmPassword){
-            const result = await axios.post(`https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/register/`, {
+            const result = await axios.post(`https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/register/`, 
+            JSON.stringify({
                 username,
                 password,
                 email
                 //header is not required since the request is in plain text
-            });
+            }));
             const body = await result;
             if (body.status === 200){
-                window.location.href='/';
+                window.location.href='/login';
             }
             else{
                 this.setState({error:body.error})

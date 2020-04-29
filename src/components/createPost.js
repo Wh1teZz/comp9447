@@ -8,11 +8,18 @@ class CreatePost extends React.Component {
     super(props)
     this.state = { 
       currentText:"",
-      currentTitle:""
+      currentTitle:"",
+      username:"",
+      userToken:""
     };
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onTextChange = this.onTextChange.bind(this);
     this.submitPost = this.submitPost.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({username:window.sessionStorage.getItem('username')});
+    this.setState({userToken:window.sessionStorage.getItem('userToken')});
   }
 
   onTitleChange = (event) => {
@@ -30,7 +37,7 @@ class CreatePost extends React.Component {
     text=this.state.currentText.trim(),
     title=this.state.currentTitle.trim(),
     ) => {
-    const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uIjoiMHFQeXdTcmN2ayIsImlhdCI6MTU4NjIyNDkzNi45NzY0OCwiZXhwIjoxNTg2ODI5NzM2Ljk3NjQ4NiwidXNlcklEIjoiODA1YzQxODNmOGQ2MTJkNDgxMGVjNzY5OGRlMTk0NGNiNDU1N2U4ODAwOWY1OTYzZWU2ODc5NjEwYjQwYmQ4YiJ9.2ZMi4Btn8p1OZQjTciJlFVLr_ZFAQ2oNrH88yKQrw78";
+    const token = window.sessionStorage.getItem('userToken');
 
     // Quick Validation
     if (!text || !title) return;
@@ -48,6 +55,7 @@ class CreatePost extends React.Component {
       
       if (res.data.statusCode === 200){
         console.log("success", res.data.postID);
+        window.location.href='/channels';
       }
   };
 
@@ -64,7 +72,7 @@ class CreatePost extends React.Component {
       
   }
 
-  
+
   return (
   <div>
     <h1>

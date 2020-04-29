@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "gatsby"
 import Layout from "../components/layout"
+import axios from 'axios';
 
 
 class WelcomePage extends React.Component {
@@ -15,12 +16,11 @@ class WelcomePage extends React.Component {
         this.setState({userToken:window.sessionStorage.getItem('userToken')});
     }
 
-     performLogout = async (userToken=this.state.userToken) => {
-        const result = await fetch(`/logout`, {
-            method: 'post',
-            body: JSON.stringify({token: userToken}),
-            //header is not required since the request is in plain text
-        });
+     performLogout = async () => {
+        const userToken = window.sessionStorage.getItem('userToken');
+        const result = await axios.post(`https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/logout`, 
+            JSON.stringify({userToken})
+        );
         window.sessionStorage.removeItem('username');
         window.sessionStorage.removeItem('userToken');
         window.location.href='/login'

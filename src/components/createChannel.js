@@ -5,7 +5,14 @@ import { Link } from "gatsby"
 
 class CreateChannel extends React.Component {
     state = {
-        currentChannelName:""
+        currentChannelName:"",
+        username:"",
+        userToken:""
+    }
+
+    componentDidMount() {
+        this.setState({username:window.sessionStorage.getItem('username')});
+        this.setState({userToken:window.sessionStorage.getItem('userToken')});
     }
 
     onNameChange = (event) => {
@@ -14,14 +21,10 @@ class CreateChannel extends React.Component {
 
     //token = window.sessionStorage.getItem('userToken');
 
-    submitChannel = async (event,
-        title=this.state.currentChannelName
-    ) => {
-        const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uIjoiMHFQeXdTcmN2ayIsImlhdCI6MTU4NjIyNDkzNi45NzY0OCwiZXhwIjoxNTg2ODI5NzM2Ljk3NjQ4NiwidXNlcklEIjoiODA1YzQxODNmOGQ2MTJkNDgxMGVjNzY5OGRlMTk0NGNiNDU1N2U4ODAwOWY1OTYzZWU2ODc5NjEwYjQwYmQ4YiJ9.2ZMi4Btn8p1OZQjTciJlFVLr_ZFAQ2oNrH88yKQrw78";
-
+    submitChannel = async (event, title=this.state.currentChannelName) => {
+        const token = window.sessionStorage.getItem('userToken');
         // Quick Validation
         if (!title) return;
-
         const res = await axios.post(`https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/channel/create/`,
             JSON.stringify(
                 {
@@ -32,7 +35,8 @@ class CreateChannel extends React.Component {
         )
 
         if (res.data.statusCode === 200) {
-            console.log("success", res.data.channelID);
+            console.log("success", res.data.channelID)
+            window.location.href='/channels';
         }
     };
 

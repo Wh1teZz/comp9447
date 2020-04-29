@@ -11,17 +11,17 @@ const LoginForm = () => {
 
     const checkLogin = async () => {
         if (username !== '' || password !== ''){
-            console.log( { username: username, password : password});
-            console.log(JSON.stringify({username:username, password:password}));
+
             const result = await axios.post(`https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/login/`, 
             JSON.stringify({
             username,
             password
             }));
+
             const body = await result;
             if (body.data.status === 200){
               window.sessionStorage.setItem('username', username);
-              window.sessionStorage.setItem('userToken', body.token);
+              window.sessionStorage.setItem('userToken', body.data.token);
               window.location.href='/welcome';
             }
             else{

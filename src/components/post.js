@@ -10,14 +10,18 @@ class Post extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            posts: []
+            posts: [],
+            username:"",
+            userToken:""
         };
         this.reMap = this.reMap.bind(this);
         this.getPosts = this.getPosts.bind(this);
     }
 
     componentDidMount() {
-    this.getPosts();
+        this.setState({username:window.sessionStorage.getItem('username')});
+        this.setState({userToken:window.sessionStorage.getItem('userToken')});
+        this.getPosts();
     }
 
      // 
@@ -55,25 +59,25 @@ class Post extends React.Component {
 
         return (
         <ul> 
-            {this.state.posts.length === 0 ?
-            (<div>Loading...</div>):
-            [
-                <div>
-                <Link to = {"/createPost/"} state={{channelID:this.props.channelID}}>
-                    <button type="button">
-                        make post
-                    </button>
-                </Link>
-                <br/> <br/> <br/>
-                </div>,
+            <Link to = {"/createPost/"} state={{channelID:this.props.channelID}}>
+            <button type="button">
+                make post
+            </button>
+            <br/> <br/> <br/>
+            </Link>
 
-                (this.state.posts.map((p_id) => {
+            {this.state.posts.length === 0 ?
+            (
+                <div>
+                    Loading...
+                </div>):
+
+            (this.state.posts.map((p_id) => {
                 return <div>
                     <Link to = {"/content/"} state={{postID:p_id.key}}>
                         {p_id.value["title"]}
                     </Link>
                 </div>;}))
-            ]
             }
         </ul>
         );
