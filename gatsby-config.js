@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `omegalul`,
+    title: `socialist-ir`,
     description: `aws cloud sec thingy comp9447`,
     author: `@gatsbyjs`,
   },
