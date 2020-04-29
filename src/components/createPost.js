@@ -53,7 +53,19 @@ class CreatePost extends React.Component {
 
 
     //    action='/'
-  render () { return (
+  render () { 
+  if (this.state.username === null){
+        
+      return (
+      <div>
+          <p>You are not logged in</p>
+      <Link to='/login'> Click here to login </Link>
+      </div>)
+      
+  }
+
+  
+  return (
   <div>
     <h1>
         Make a post. Title: {this.state.currentTitle}

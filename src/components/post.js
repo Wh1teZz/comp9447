@@ -43,6 +43,16 @@ class Post extends React.Component {
     };
 
     render (){
+        if (this.state.username === null){
+        
+            return (
+            <div>
+                <p>You are not logged in</p>
+            <Link to='/login'> Click here to login </Link>
+            </div>)
+            
+        }
+
         return (
         <ul> 
             {this.state.posts.length === 0 ?

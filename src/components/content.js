@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import {Link} from "gatsby";
 
 class Comments extends React.Component {
 
@@ -63,6 +64,16 @@ class Comments extends React.Component {
 
 
     render() {
+        if (this.state.username === null){
+        
+            return (
+            <div>
+                <p>You are not logged in</p>
+            <Link to='/login'> Click here to login </Link>
+            </div>)
+            
+        }
+
         return (
             <ul>
                 {this.state.postInfo.length === 0 ?

@@ -30,7 +30,14 @@ class WelcomePage extends React.Component {
 
     if (this.state.username === null){
         
-        return <Link to='/login'  />
+        return (
+        <Layout>
+        <div>
+            <p>You are not logged in</p>
+        <Link to='/login'> Click here to login </Link>
+        </div>
+        </Layout>
+        )
         
     }
 

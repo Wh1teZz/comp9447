@@ -4,14 +4,16 @@ import { Link } from "gatsby";
 
 class Channels extends React.Component {
 
-    
-
     state = {
-        channels: []
+        channels: [],
+        username:"",
+        userToken:""
         };
 
 
     componentDidMount() {
+    this.setState({username:window.sessionStorage.getItem('username')});
+    this.setState({userToken:window.sessionStorage.getItem('userToken')});
     this.getChannels();
     }
 
@@ -22,13 +24,24 @@ class Channels extends React.Component {
     }
 
     getChannels = async () => {
-        // let token = window.sessionStorage.getItem('userToken');
         let res = await axios.get("https://9il287rnf8.execute-api.us-east-1.amazonaws.com/mvp/channel/get/");
         let data = Object.keys(res.data.channels).map((key) => this.reMap(key, res.data.channels[key]));
         this.setState({ channels: data });
     };
 
     render (){
+        if (this.state.username === null){
+        
+            return (
+                <div>
+                    <p>You are not logged in</p>
+                    <Link to='/login'> Click here to login </Link>
+                    <br/><br/><br/>
+                </div>
+            )
+            
+        }
+
         return (
         <ul> 
             <div>

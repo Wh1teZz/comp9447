@@ -15,13 +15,7 @@ export default () => (
       {` `}
       <Link to="/channels/">Channels</Link>
       {` `}
-      <Link to="/login/">Login</Link>
-      {` `}
-      <Link to="/register/">Register</Link>
-      {` `}
-      <Link to="/profile/">Profile</Link>
-      {` `}
-      <Link to="/">Logout</Link>
+      <Link to="/welcome">Logout</Link>
     </nav>
   </div>
 )

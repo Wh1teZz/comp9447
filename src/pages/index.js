@@ -19,7 +19,7 @@ const Home = () => {
       <SEO title="Home" />
       <h1>it's a reddit clone</h1>
       <p>there's some content here</p>
-      <p>probably limit to 20 articles on home page</p>
+      <p>sanity check for api gateway and lambda:</p>
       <p>{HW}</p>
       <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
         <Image />
